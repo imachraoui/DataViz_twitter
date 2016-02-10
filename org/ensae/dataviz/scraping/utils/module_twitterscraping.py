@@ -25,62 +25,80 @@ import time
 import string
 import os
 
-auth=[None] * len(consumer_key)
-api=[None] * len(consumer_key)
-for i in range(len(consumer_key)):
-    auth[i] = OAuthHandler(consumer_key[i], consumer_secret[i])
-    auth[i].set_access_token(access_token[i], access_secret[i])
-    api[i] = tweepy.API(auth[i])
+class TwitterApiUtil() :
 
-def printjson(x):
-    print(json.dumps(x._json))
+    def __init__(self, db_location):
+        self.auth=[None] * len(consumer_key)
+        self.apis=[None] * len(consumer_key)
+        self.db_location = db_location
+        for i in range(len(consumer_key)):
+            self.auth[i] = OAuthHandler(consumer_key[i], consumer_secret[i])
+            self.auth[i].set_access_token(access_token[i], access_secret[i])
+            self.apis[i] = tweepy.API(self.auth[i])
+        self.current_api_index = 0
 
-def storejson(x,n,outfile):
-    with open(db_location+outfile, 'w') as f:
-        for i in x.items(n):
-            json.dump(i._json, f)
-            f.write('\n')
+    def get_apis(self):
+        return(self.apis)
 
-def readjson(file):
-    data=[]
-    with open(db_location+file) as f:
-        for line in f:
-            if line != "\n":
-                data.append(json.loads(line))
-    return(data)
+    def get_current_api(self):
+        remaining = self.search_limit(self.apis[self.current_api_index])['remaining']
+        i=1
+        while remaining == 0 & i<4 :
+            self.current_api_index = (self.current_api_index + 1) % len(self.apis)
+            remaining = self.search_limit(self.apis[self.current_api_index])['remaining']
+            i=i+1
+        return self.apis[self.current_api_index]
 
-def search_limit(apis):
-    return(apis.rate_limit_status()["resources"]["search"]["/search/tweets"])
+    def printjson(self,x):
+        print(json.dumps(x._json))
 
-def time_search_limit(apis):
-        return(apis.rate_limit_status()["resources"]["search"]["/search/tweets"]["reset"]-time.time())
+    def storejson(self,x,n,outfile):
+        with open(self.db_location+outfile, 'w') as f:
+            for i in x.items(n):
+                json.dump(i._json, f)
+                f.write('\n')
+
+    def readjson(self,file):
+        data=[]
+        with open(self.db_location+file) as f:
+            for line in f:
+                if line != "\n":
+                    data.append(json.loads(line))
+        return(data)
+
+    def search_limit(self,api):
+        return(api.rate_limit_status()["resources"]["search"]["/search/tweets"])
+
+    def time_search_limit(self,api):
+            return(api.rate_limit_status()["resources"]["search"]["/search/tweets"]["reset"]-time.time())
 
 
-def storetwitterstream(api, destinationfile, query, lang=["fr"], starttime=time.time(), timelimit=60):
+    def storetwitterstream(self, destinationfile, query, lang=["fr"], starttime=time.time(), timelimit=60):
 
-    class MyListener(StreamListener):
-        def __init__(self, destinationfile, starttime, timelimit):
-            self.outfile = db_location+destinationfile+".json"
-            self.starttime=starttime
-            self.timelimit=timelimit
+        class MyListener(StreamListener):
+            def __init__(self, destinationfile, starttime, timelimit):
+                self.outfile = self.TwitterApiUtil.db_location+destinationfile+".json"
+                self.starttime=starttime
+                self.timelimit=timelimit
 
-        def on_data(self, data):
-            while (time.time()-self.starttime)<self.timelimit:
-                try:
-                    with open(self.outfile, 'a') as f:
-                        f.write(data)
-                        print(data)
-                        return(True)
-                except BaseException as e:
-                    print("Error on_data: %s" % str(e))
-                    time.sleep(5)
-                    pass
+            def on_data(self, data):
+                while (time.time()-self.starttime)<self.timelimit:
+                    try:
+                        with open(self.outfile, 'a') as f:
+                            f.write(data)
+                            print(data)
+                            return(True)
+                    except BaseException as e:
+                        print("Error on_data: %s" % str(e))
+                        time.sleep(5)
+                        pass
+                    return(True)
+                else: return(False)
+
+            def on_error(self, status):
+                print(status)
                 return(True)
-            else: return(False)
 
-        def on_error(self, status):
-            print(status)
-            return(True)
+        twitter_stream = Stream(self.get_current_api().auth, MyListener(destinationfile,starttime,timelimit))
+        twitter_stream.filter(track=query,languages=lang)
 
-    twitter_stream = Stream(api.auth, MyListener(destinationfile,starttime,timelimit))
-    twitter_stream.filter(track=query,languages=lang)
