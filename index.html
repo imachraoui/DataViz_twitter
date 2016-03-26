@@ -1,37 +1,359 @@
-<!doctype html>
-
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="fr">
 <head>
-  <meta charset="utf-8">
+	<title>Home</title>
+	<meta charset="utf-8">
+	<meta name="format-detection" content="telephone=no"/>
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="css/grid.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/rd-mailform.css">
+	<link rel="stylesheet" href="css/style-d3.css">
 
-  <title>The HTML5 Herald</title>
-  <meta name="description" content="The HTML5 Herald">
-  <meta name="author" content="SitePoint">
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery-migrate-1.2.1.js"></script>
+	<script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'>
 
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+</script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js" charset="utf-8"></script>
 
-  <!--[if lt IE 9]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+	<!--[if lt IE 9]>
+	<html class="lt-ie9">
+	<div style=' clear: both; text-align:center; position: relative;'>
+		<a href="http://windows.microsoft.com/en-US/internet-explorer/..">
+			<img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820"
+					 alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."/>
+		</a>
+	</div>
+	<script src="js/html5shiv.js"></script>
+	<![endif]-->
+
+	<script src='js/device.min.js'></script>
 </head>
 
 <body>
-  <script src="js/scripts.js"></script>
-  <div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    Dropdown
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li><a href="#">Action</a></li>
-    <li><a href="#">Another action</a></li>
-    <li><a href="#">Something else here</a></li>
-    <li role="separator" class="divider"></li>
-    <li><a href="#">Separated link</a></li>
-  </ul>
+<div class="page">
+	<!--==============================HEADER==============================-->
+	<header>
+		<section class="parallax parallax01">
+			<div class="top-panel">
+				<div class="container">
+					<div class="brand">
+						<h1 class="brand_name">#Politique</h1>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<h2 style="font-family: 'Ubuntu', sans-serif;font-weight: bold;">TWITTER AWARDS</h2>
+				<p><em>Avec le Gouvernement et l'Assemblée Nationale</em></p>
+
+			</div>
+		</section>
+	</header>
+
+	<!--==============================CONTENT==============================-->
+	<main>
+		<section class="well center">
+			<div class="container">
+				<h2>Venez découvrir notre classement Twitter des personnalités politiques françaises</h2>
+				<p>Vous êtes-vous déjà demandé quelle personnalité politique est la plus populaire sur Twitter ?
+					Qui fait le plus de buzz en 140 caractères ?
+					<br>Qui sont les vrais accros du tweet (y compris pendant les séances de l'Assemblée Nationale) ?
+					<br>Vous trouverez toutes les réponses à vos questions en quelques visualisations ci-dessous.
+					<br>&nbsp
+					<br> Pour vous aider à vous repérer, voici les couleurs utilisées pour chaque nuance politique :
+				</p>
+				<div class="row iconed-list">
+					<div class="grid_4">
+						<div class="icon fa-coffee"></div>
+						<h3>Extrême gauche</h3>
+						<p>PCF, NPA, LO, PG, POI, MDP</p>
+					</div>
+					<div class="grid_4">
+						<div class="icon fa-glass icon__bg-2"></div>
+						<h3>Gauche<br>&nbsp</h3>
+						<p>PS, EELV, PRG, MRC </p>
+					</div>
+					<div class="grid_4">
+						<div class="icon fa-cutlery icon__bg-3"></div>
+						<h3>Centre<br>&nbsp</h3>
+						<p>MODEM , UDI, UDE, MEI</p>
+					</div>
+					<div class="grid_4">
+						<div class="icon fa-cutlery icon__bg-4"></div>
+						<h3>Droite<br>&nbsp</h3>
+						<p>LR, PCD, MPF, NC, CNIP</p>
+					</div>
+					<div class="grid_4">
+						<div class="icon fa-cutlery icon__bg-5"></div>
+						<h3>Extrême droite</h3>
+						<p>FN</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+
+		<section class="well">
+			<div class="container">
+				<h2>Quelques précisions avant de commencer</h2>
+				<div class="row">
+					<div class="grid_6 left">
+						<h4>Quelle est la motivation de notre projet ?</h4>
+						<p>Nous sommes une équipe de trois étudiants en Data Science à l'ENSAE ParisTech.
+							Pour un de nos cours, nous avons choisi d'explorer
+							comment le discours politique se traduit sur les réseaux sociaux.</p>
+					</div>
+					<div class="grid_6 left">
+						<h4>Sur quels critères se base notre classement ?</h4>
+						<p>Nous avons construit quelques indicateurs simples et amusants à partir des données brutes de Twitter. Chacun de ces indicateurs est lié à un trait de caractère : la bavardise, la popularité, l'originalité, etc.</p>
+					</div>
+				</div>
+				<div class="row offset02">
+					<div class="grid_6 left">
+						<h4>Qui fait partie du classement ?</h4>
+						<p>Nous avons essayé de regrouper tous les comptes Twitter des députés et membres du gouvernement. Notre liste compte 447 personnalités politiques. Vous pouvez la consulter <a href="https://docs.google.com/spreadsheets/d/1ie2t10KOWD-6c-QvNIPHNVyMrHn6ZaewB_xFmCKTxh8/edit?usp=sharing"><u>ici</u></a>. N'hésitez pas à nous dire s'il en manque.</p>
+					</div>
+					<div class="grid_6 left">
+						<h4>Comment avons-nous fait ?</h4>
+						<p>Les données Twitter sont publiques et accessibles par API. Nous avons donc récupéré tous les tweets et informations de compte des personnalités choisies. Les outils utilisés sont en Open Source : Python, Bootstrap, D3.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="well well__02 bg-2 shadow">
+			<div class="container">
+			<h2>Catégorie : Le plus bavard</h2>
+				<div class="row">
+					<div class="grid_6 left">
+						<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
+					</div>
+
+					<div class="grid_6 left">
+						<div class="img"><img src="images/using a smartphone.jpg" style='width:70%' alt=""></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="well well__04 bg-3">
+			<div class="container">
+				<div class="grid_5">
+						<div id = container>
+							<div class = "child_1">
+								<svg class="chart_Number_of_tweets"></svg>
+							</div>
+							<div class="child_2">
+								<svg class="info_Number_of_tweets"></svg>
+							</div>
+						</div>
+					</div>
+			</div>
+		</section>
+
+		<section class="well well__02 bg-2 shadow">
+			<div class="container">
+			<h2>Catégorie : Le plus suivi</h2>
+				<div class="row">
+					<div class="grid_6 left">
+						<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
+					</div>
+
+					<div class="grid_6 left">
+						<div class="img"><img src="images/followers.PNG" style='width:70%' alt=""></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="well well__04 bg-3">
+			<div class="container">
+				<div class="grid_5">
+						<div id = container>
+							<div class = "child_1">
+								<svg class="chart_Number_of_followers"></svg>
+							</div>
+							<div class="child_2">
+								<svg class="info_Number_of_followers"></svg>
+							</div>
+						</div>
+					</div>
+			</div>
+		</section>
+
+		<section class="well well__02 bg-2 shadow">
+			<div class="container">
+			<h2>Catégorie : Le plus viral</h2>
+				<div class="row">
+					<div class="grid_6 left">
+						<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
+					</div>
+
+					<div class="grid_6 left">
+						<div class="img"><img src="images/using a smartphone.jpg" style='width:70%' alt=""></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="well well__04 bg-3">
+			<div class="container">
+				<div class="grid_5">
+						<div id = container>
+							<div class = "child_1">
+								<svg class="chart_ratio_retweets"></svg>
+							</div>
+							<div class="child_2">
+								<svg class="info_ratio_retweets"></svg>
+							</div>
+						</div>
+					</div>
+			</div>
+		</section>
+
+		<section class="well well__02 bg-2 shadow">
+			<div class="container">
+			<h2>Catégorie : Le plus social</h2>
+				<div class="row">
+					<div class="grid_6 left">
+						<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
+					</div>
+
+					<div class="grid_6 left">
+						<div class="img"><img src="images/using a smartphone.jpg" style='width:70%' alt=""></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="well well__04 bg-3">
+			<div class="container">
+				<div class="grid_5">
+						<div id = container>
+							<div class = "child_1">
+								<svg class="chart_Following_to_follower_ratio"></svg>
+							</div>
+							<div class="child_2">
+								<svg class="info_Following_to_follower_ratio"></svg>
+							</div>
+						</div>
+					</div>
+			</div>
+		</section>
+
+		<section class="well well__02 bg-2 shadow">
+			<div class="container">
+			<h2>Catégorie : Le plus dissipé</h2>
+				<div class="row">
+					<div class="grid_6 left">
+						<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
+					</div>
+
+					<div class="grid_6 left">
+						<div class="img"><img src="images/using a smartphone.jpg" style='width:70%' alt=""></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="well well__04 bg-3">
+			<div class="container">
+				<div class="grid_5">
+						<div id = container>
+							<div class = "child_1">
+								<svg class="chart_lazy"></svg>
+							</div>
+							<div class="child_2">
+								<svg class="info_lazy"></svg>
+							</div>
+						</div>
+					</div>
+			</div>
+		</section>
+
+		<section class="well well__02 bg-2 shadow">
+			<div class="container">
+			<h2>Catégorie : Celui qui dégaine le plus vite</h2>
+				<div class="row">
+					<div class="grid_6 left">
+						<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
+					</div>
+
+					<div class="grid_6 left">
+						<div class="img"><img src="images/using a smartphone.jpg" style='width:70%' alt=""></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="well well__04 bg-3">
+			<div class="container">
+				<div class="grid_5">
+						<div id = container>
+							<div class = "child_1">
+								<svg class="chart_points"></svg>
+							</div>
+							<div class="child_2">
+								<svg class="info_points"></svg>
+							</div>
+						</div>
+					</div>
+			</div>
+		</section>
+
+		<section class="well well__02 bg-2 shadow">
+			<div class="container">
+			<h2>Catégorie : .......</h2>
+				<div class="row">
+					<div class="grid_6 left">
+						<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
+					</div>
+
+					<div class="grid_6 left">
+						<div class="img"><img src="images/using a smartphone.jpg" style='width:70%' alt=""></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="well well__04 bg-3">
+			<div class="container">
+				<div class="grid_5">
+						<div id = container>
+							<div class='tableauPlaceholder' style='width: 1004px; height: 869px;'><noscript><a href='#'><img alt='BATTLE ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Fr&#47;FrenchPolitics-TwitterBattle&#47;BATTLE&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1004' height='869' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='FrenchPolitics-TwitterBattle&#47;BATTLE' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Fr&#47;FrenchPolitics-TwitterBattle&#47;BATTLE&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /><param name='showTabs' value='y' /><param name='bootstrapWhenNotified' value='true' /></object></div>
+						</div>
+					</div>
+			</div>
+		</section>
+
+		<section class="well well__04 bg-3">
+			<div class="container">
+			<h2>Ensuring 100% guest satisfaction<br> on every visit</h2>
+			<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure doloю</p>
+			<a href="#" class="btn">Get a Quotes</a>
+			</div>
+		</section>
+
+
+		<link rel="stylesheet" href="https://dl.dropbox.com/s/n0vqwinpajobrrm/styled3.css">
+		<script src="https://dl.dropboxusercontent.com/s/hgosowh1fjvni7p/script-charts.js?dl=0"></script>
+
+
+	</main>
+
+
+	<!--==============================FOOTER==============================-->
+	<footer>
+		<div class="container">
+			<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitatio.</p>
+			<div class="footer-brand">
+				<img src="images/logo-ensae.jpg" style="width:100px" alt="">
+			</div>
+			<p class="copyright">
+				© <span id="copyright-year"></span>. All Rights Reserved
+				<!-- {%FOOTER_LINK} -->
+			</p>
+		</div>
+	</footer>
 </div>
 
-<iframe width="800" height="450" src="//embed.chartblocks.com/1.0/?c=56c2e7ec9973d25237f7bf73&t=60a4e8800b46935" frameBorder="0"></iframe>
-  <h1> Mon projet</h1>
+<script src="js/script.js"></script>
+<!-- coded by nyan -->
 </body>
 </html>

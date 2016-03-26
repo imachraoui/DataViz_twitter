@@ -1,0 +1,35 @@
+[class*="chart_"] rect {
+  border-radius: 25px;
+  border-radius: 25px;
+}
+
+[class*="chart_"] text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+
+.child_1{
+    float:left;
+    margin-right:5px;
+}
+
+[class*="info_"] text {
+  fill: black;
+  font: 13px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.y.axis path {
+  display: none;
+}
