@@ -395,9 +395,7 @@ header * + .row {
   background: rgba(71, 65, 60, 0.9);
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
   background-image : url("../images/Twitter-Banner.png");
-  background-size: contain;
-  background-repeat : no-repeat;
-}
+  background-repeat: no-repeat;  background-size: contain;}
 .lt-ie9 .top-panel {
   background: none;
   -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e647413c', endColorstr='#e647413c');
