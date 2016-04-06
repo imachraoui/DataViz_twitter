@@ -385,6 +385,9 @@ header h2 + p {
 header * + .row {
   margin-top: 43px;
 }
+tab-toolbar tab-fill tab-widget{
+	opacity :0;
+}
 /*==================== Top Panel ====================*/
 .top-panel {
   position: absolute;
